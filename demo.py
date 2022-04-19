@@ -5,8 +5,16 @@ from datetime import time, datetime
 
 # https://share.streamlit.io/streamlit/30days
 
-st.header('Line chart')
+st.title('st.file_uploader')
 
-chart_data = pd.DataFrame(np.random.randn(20, 3), columns=['a', 'b', 'c'])
+st.subheader('Input CSV')
+uploaded_file = st.file_uploader("Choose a file")
 
-st.line_chart(chart_data)
+if uploaded_file is not None:
+  df = pd.read_csv(uploaded_file)
+  st.subheader('DataFrame')
+  st.write(df)
+  st.subheader('Descriptive Statistics')
+  st.write(df.describe())
+else:
+  st.info('☝️ Upload a CSV file')
